@@ -1,0 +1,74 @@
+<list>
+  <TreeNode>
+    <number>0</number>
+    <parent>-1</parent>
+    <label>Init State
+0.0
+0
+Sala Direita: SALA SUJA
+Sala Esquerda: SALA SUJA
+Aspirador: SALA ESQUERDA
+</label>
+    <solution>true</solution>
+  </TreeNode>
+  <TreeNode>
+    <number>1</number>
+    <parent>0</parent>
+    <label>Mover
+1.0
+1
+Sala Direita: SALA SUJA
+Sala Esquerda: SALA SUJA
+Aspirador: SALA DIREITA
+</label>
+    <solution>true</solution>
+  </TreeNode>
+  <TreeNode>
+    <number>2</number>
+    <parent>0</parent>
+    <label>Aspirar
+1.0
+1
+Sala Direita: SALA SUJA
+Sala Esquerda: SALA LIMPA
+Aspirador: SALA ESQUERDA
+</label>
+    <solution>false</solution>
+  </TreeNode>
+  <TreeNode>
+    <number>3</number>
+    <parent>1</parent>
+    <label>Aspirar
+2.0
+2
+Sala Direita: SALA LIMPA
+Sala Esquerda: SALA SUJA
+Aspirador: SALA DIREITA
+</label>
+    <solution>true</solution>
+  </TreeNode>
+  <TreeNode>
+    <number>4</number>
+    <parent>3</parent>
+    <label>Mover
+3.0
+3
+Sala Direita: SALA LIMPA
+Sala Esquerda: SALA SUJA
+Aspirador: SALA ESQUERDA
+</label>
+    <solution>true</solution>
+  </TreeNode>
+  <TreeNode>
+    <number>5</number>
+    <parent>4</parent>
+    <label>Aspirar
+4.0
+4
+Sala Direita: SALA LIMPA
+Sala Esquerda: SALA LIMPA
+Aspirador: SALA ESQUERDA
+</label>
+    <solution>true</solution>
+  </TreeNode>
+</list>
