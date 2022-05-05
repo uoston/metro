@@ -5,11 +5,11 @@ import br.com.mariojp.ai.agent.AbstractState;
 /**
  * 
  * @project AgenteFW
- * @package br.com.mariojp.exemplos.aspirador
+ * @package br.com.mariojp.exemplos.metro
  * @file Estado.java
  * @author Mario Jorge Pereira
  * @version 1.1
- * <p>Classe que representa a o Ambiente para o problema do Aspirador</p>
+ * <p>Classe que representa a o Ambiente para o problema do Metrô de Salvador</p>
  *
  */
 public class Estado extends AbstractState {
@@ -17,22 +17,18 @@ public class Estado extends AbstractState {
 	/**
 	 * Constantes 
 	 */
-	public static final int SALA_LIMPA = 0;
-	public static final int SALA_SUJA = 1;
-	public static final int SALA_DIREITA = 0;
-	public static final int SALA_ESQUERDA = 1;
 	
-	private int salaAtual;
-	private int salaDireita;
-	private int salaEsquerda;
+	private int numeroEstacao;
+	private int linhaAtual;
+
 	
 	 public Estado(){
 	 }
 	 
-	 public Estado(int salaAtual,int salaDireita, int salaEsquerda){
-		 this.salaAtual = salaAtual;
-		 this.salaDireita = salaDireita;
-		 this.salaEsquerda = salaEsquerda;
+	 public Estado(int numeroEstacao){
+		 this.numeroEstacao = numeroEstacao;
+		 //this.linhaAtual = linhaAtaual;
+		 
 	 }
 	
     /**
@@ -51,79 +47,58 @@ public class Estado extends AbstractState {
    }
 	
 	/**
-	 * Verifica se os estados s�o iguais
+	 * Verifica se os estados são iguais
 	 */
 	public boolean equals(Object arg0) {
         Estado outro = (Estado) arg0;
         boolean igual = false;
-        if(this.getSalaDireita() == outro.getSalaDireita() &&
-        	this.getSalaEsquerda() == outro.getSalaEsquerda() &&
-        	this.getSalaAtual() == outro.getSalaAtual()) {
+        
+        if(this.getNumeroEstacao() == outro.getNumeroEstacao()){
             igual = true;
         }
         return igual;
 	}
 
 	/**
-	 * Obtem a sala atual do aspirador (DIREITA ou ESQUERDA). 
-	 * @return int - Sala Atual
+	 * Obtem a estacação atual
+	 * @return int - Número da estacão
+         */
+         public int getNumeroEstacao(){
+             return numeroEstacao;
+         }
+
+	/**
+	 * Atribui o número da estação atual.
+	 * @param numeroEstacao
 	 */
-	public int getSalaAtual() {
-		return salaAtual;
+	public void setNumeroEstacao(int numeroEstacao) {
+		this.numeroEstacao = numeroEstacao;
 	}
 
 	/**
-	 * Atribui a sala atual do aspirador (DIREITA ou ESQUERDA). 
-	 * @param salaAtual
+	 * Obtem a cor da linha do trem
+	 * @return int - Cor da  linha
 	 */
-	public void setSalaAtual(int salaAtual) {
-		this.salaAtual = salaAtual;
+	public int getLinhaAtual() {
+		return linhaAtual;
 	}
 
 	/**
-	 * Obtem o estado da sala direita (SUJA ou LIMPA)
-	 * @return int - Estado da Sala
+	 * Atribui a cor da linha da estação) 
+	 * @param linhaAtual 
 	 */
-	public int getSalaDireita() {
-		return salaDireita;
+	public void setLinhaAtual(int linhaAtual) {
+		this.linhaAtual = linhaAtual;
 	}
-
-	/**
-	 * Atribui o estado da sala direita (SUJA ou LIMPA) 
-	 * @param salaDireita
-	 */
-	public void setSalaDireita(int salaDireita) {
-		this.salaDireita = salaDireita;
-	}
-
-	/**
-	 * Obtem o estado da sala esquerda (SUJA ou LIMPA)
-	 * @return int - Estado da Sala
-	 */
-	public int getSalaEsquerda() {
-		return salaEsquerda;
-	}
-
-	/**
-	 * Atribui o estado da sala esquerda (SUJA ou LIMPA) 
-	 * @param salaEsquerda
-	 */
-	public void setSalaEsquerda(int salaEsquerda) {
-		this.salaEsquerda = salaEsquerda;
-	}
-	
 
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
-		sb.append("Sala Direita: ");
-		sb.append((this.getSalaDireita()==Estado.SALA_LIMPA)?"SALA LIMPA":"SALA SUJA");
+		sb.append("Estação : ");
+		sb.append(this.getNumeroEstacao());
 		sb.append("\n");
-		sb.append("Sala Esquerda: ");
-		sb.append((this.getSalaEsquerda()==Estado.SALA_LIMPA)?"SALA LIMPA":"SALA SUJA");
+		sb.append("Linha Atual: ");
+		sb.append(this.getLinhaAtual());
 		sb.append("\n");
-		sb.append("Aspirador: ");
-		sb.append((this.getSalaAtual()==Estado.SALA_DIREITA)?"SALA DIREITA":"SALA ESQUERDA");
-		sb.append('\n');
 		return sb.toString();
 	}
 
