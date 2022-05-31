@@ -1,6 +1,8 @@
 package br.com.mariojp.exemplos.metro;
 
 import br.com.mariojp.ai.agent.AbstractState;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -18,15 +20,17 @@ public class Estado extends AbstractState {
 	 * Constantes 
 	 */
 	
-	private int numeroEstacao;
+	private int estacao;
 	private int linhaAtual;
-
+        private int estacaoAnt = 0;
+        private ArrayList<Integer> estacoesAdjacentes = new ArrayList<Integer>();
+        public static ArrayList<Integer> estacoesAnt = new ArrayList<Integer>();
 	
 	 public Estado(){
 	 }
 	 
 	 public Estado(int numeroEstacao){
-		 this.numeroEstacao = numeroEstacao;
+		 this.estacao = numeroEstacao;
 		 //this.linhaAtual = linhaAtaual;
 		 
 	 }
@@ -52,8 +56,8 @@ public class Estado extends AbstractState {
 	public boolean equals(Object arg0) {
         Estado outro = (Estado) arg0;
         boolean igual = false;
-        
-        if(this.getNumeroEstacao() == outro.getNumeroEstacao()){
+            
+        if(this.getEstacao() == outro.getEstacao()){
             igual = true;
         }
         return igual;
@@ -63,38 +67,79 @@ public class Estado extends AbstractState {
 	 * Obtem a estacação atual
 	 * @return int - Número da estacão
          */
-         public int getNumeroEstacao(){
-             return numeroEstacao;
+         public int getEstacao(){
+             return this.estacao;
          }
 
 	/**
 	 * Atribui o número da estação atual.
 	 * @param numeroEstacao
 	 */
-	public void setNumeroEstacao(int numeroEstacao) {
-		this.numeroEstacao = numeroEstacao;
+	public void setEstacao(int numeroEstacao) {
+		this.estacao = numeroEstacao;
+                this.AddeEstaçoesAdjacentes();
 	}
 
+        	/**
+	 * Obtem a estacação atual
+	 * @return int - Número da estacão
+         */
+         public int getEstacaoAnt(){
+             return this.estacaoAnt;
+         }
+
+	/**
+	 * Atribui o número da estação atual.
+	 * @param estacaoAnt
+	 */
+	public void setEstacaoAnt(int estacaoAnt) {
+		this.estacaoAnt = estacaoAnt;
+	}
 	/**
 	 * Obtem a cor da linha do trem
 	 * @return int - Cor da  linha
 	 */
 	public int getLinhaAtual() {
-		return linhaAtual;
+		return this.linhaAtual;
 	}
 
 	/**
 	 * Atribui a cor da linha da estação) 
 	 * @param linhaAtual 
 	 */
-	public void setLinhaAtual(int linhaAtual) {
+        public void setLinhaAtual(int linhaAtual) {
 		this.linhaAtual = linhaAtual;
 	}
+	public ArrayList<Integer> getEstacoesAnt() {
+		return this.estacoesAnt;
+	}
+        public boolean checaEstacaAnt(int estacao) {
+		return !this.estacoesAnt.contains(estacao);
+	}
+	public ArrayList<Integer> getEstacoesAdjacentes() {
+		return this.estacoesAdjacentes;
+	}
 
+        public void AddeEstaçoesAdjacentes(){
+            Iterator<Integer> it = Mapa.mapa.get(this.estacao).keySet().iterator(); 
+
+            while(it.hasNext()) {
+                int e = it.next();
+                this.estacoesAdjacentes.add(e);
+            }
+        }
+	/**
+	 * Atribui a cor da linha da estação) 
+	 * @param linhaAtual 
+	 */
+	public void setEstacoesmt(int estacao) {
+		this.estacoesAnt.add(estacao);
+	}
+        
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("Estação : ");
-		sb.append(this.getNumeroEstacao());
+		sb.append(this.getEstacao());
 		sb.append("\n");
 		sb.append("Linha Atual: ");
 		sb.append(this.getLinhaAtual());

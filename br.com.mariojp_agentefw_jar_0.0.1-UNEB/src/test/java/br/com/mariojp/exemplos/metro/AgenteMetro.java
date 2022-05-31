@@ -18,7 +18,7 @@ import br.com.mariojp.ai.agent.exception.EmptyBorderException;
  * @project AgenteFW
  * @package br.com.mariojp.exemplos.aspirador
  * @file AgenteAspirador.java
- * @author Mario Jorge Pereira
+ * @author uoston e luana
  * @version 1.1
  *
  * <p>Classe que representa o Agente para o problema do Aspirador</p>
@@ -34,23 +34,31 @@ public class AgenteMetro {
 	
 	
 	public static void main(String[] args) throws IOException {
-		
-		
-            BufferedReader teclado = new BufferedReader(new InputStreamReader(
+            
+            Mapa mapaSalvador = new Mapa();
+
+    //        System.out.println(mapaSalvador.mapa);
+/*  
+	    BufferedReader teclado = new BufferedReader(new InputStreamReader(
 				System.in));            
             System.out.println("Qual a estacão inicial?");
             int estacaoInicial = Integer.parseInt(teclado.readLine());
             System.out.println("Qual a estacão final?");
             int estacaoFinal = Integer.parseInt(teclado.readLine());
-            
-            Estado EstacaoInicial = new Estado(estacaoInicial);
-            Estado EstacaoFinal = new Estado(estacaoFinal);
+         */   
+            Estado EstacaoInicial = new Estado(2);
+            EstacaoInicial.setEstacoesmt(2);
+            Estado EstacaoFinal = new Estado(4);
             
             //Criando uma instancia da configura��o do agente.
             AgentModel model = new AgentModel();
             model.setInitState(EstacaoInicial);
             
             model.addObjective(EstacaoFinal);
+            
+            //Instanciando e adicionando as Açoes
+            model.addAction("Mover",new Mover());
+            
             //Definindo a estrategia
             model.setType(IAgent.DEPTH_FIRST_SEARCH);
             //Criamos o agente
@@ -69,6 +77,6 @@ public class AgenteMetro {
             System.out.println(cam);
             System.out.println(agente);
             System.out.println(nofinal);
-            System.out.println("-------------");
+           // System.out.println("-------------");
         }
 }
